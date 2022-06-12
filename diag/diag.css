@@ -1,0 +1,35 @@
+:root {
+  --diag-bg:    white;
+  --diag-text:  black;
+  --diag-accn:  gray;
+  --diag-title: white;
+}
+
+.diag {
+  position: absolute;
+  color: var(--diag-text);
+  background-color: var(--diag-bg);
+  border: solid 1px var(--diag-accn);
+}
+
+.diag-inner {
+  margin: 0.25em;
+}
+
+.diag-title {
+  color: var(--diag-title);
+  background-color: var(--diag-accn);
+  font-weight: bold;
+  width: calc(100% - 0.1rem);
+  padding: 0.1em;
+}
+
+.diag-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.diag-invisible {
+  display: none;
+}
