@@ -7,13 +7,30 @@ function makeDiag(elem) {
   elem.classList.add("diag");
   elem.innerHTML = `<div class="diag-inner">${elem.innerHTML}</div>`
 
+  let titleElem;
   let title = elem.attributes.title;
   if(title !== undefined) {
     elem.innerHTML = `<div class="diag-title">${title.value}</div>${elem.innerHTML}`
+    titleElem = elem.children[0];
   }
 
   let align = elem.attributes.at;
-  if(align !== undefined) {
+  if(align !== undefined && align.value === "drag" && titleElem !== undefined) {
+    titleElem.onmousedown = e => {
+      let ix = e.clientX, iy = e.clientY;
+      document.onmousemove = e => {
+        e.preventDefault();
+        let nx = ix - (ix - e.clientX),
+            ny = iy - (iy - e.clientY) + (titleElem.clientHeight/2);
+        elem.style.left = `${nx}px`;
+        elem.style.top  = `${ny}px`;
+      }
+    }
+    document.onmouseup = () => {
+      document.onmousemove = () => {};
+    }
+    elem.classList.add("diag-center");
+  } else if(align !== undefined) {
     elem.classList.add(`diag-${align.value}`);
   }
 }
