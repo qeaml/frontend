@@ -1,6 +1,6 @@
 function makeDiag(elem) {
   if(elem.tagName !== 'DIAG') {
-    for(child of elem.body.children)
+    for(child of elem.children)
       makeDiag(child);
     return;
   }
